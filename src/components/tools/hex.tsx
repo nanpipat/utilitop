@@ -31,7 +31,7 @@ export default function HexTool() {
         <Select value={mode} onChange={setMode} options={[{ value: "encode", label: "Text → Hex" }, { value: "decode", label: "Hex → Text" }]} />
         <ActionButton onClick={() => setInput("")} variant="secondary">Clear</ActionButton>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <span className="text-xs text-text-secondary mb-1 block">Input</span>
           <InputArea value={input} onChange={setInput} placeholder={mode === "encode" ? "Enter text..." : "Enter hex string..."} />

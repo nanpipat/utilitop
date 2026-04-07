@@ -41,6 +41,10 @@ const toolMap: Record<string, React.ComponentType> = {
   "http-status": dynamic(() => import("@/components/tools/http-status")),
   jsonpath: dynamic(() => import("@/components/tools/jsonpath")),
   "jwt-generator": dynamic(() => import("@/components/tools/jwt-generator")),
+  mermaid: dynamic(() => import("@/components/tools/mermaid")),
+  plantuml: dynamic(() => import("@/components/tools/plantuml")),
+  graphviz: dynamic(() => import("@/components/tools/graphviz")),
+  d2: dynamic(() => import("@/components/tools/d2")),
 };
 
 export function getToolComponent(toolId: string) {

@@ -43,7 +43,7 @@ export default function TextSorter() {
         <Toggle label="Ignore case (dedup)" checked={ignoreCase} onChange={setIgnoreCase} />
         <ActionButton onClick={process}>Process</ActionButton>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div>
           <span className="text-xs text-text-secondary mb-1 block">Input</span>
           <InputArea value={input} onChange={setInput} placeholder="Enter lines to sort..." />

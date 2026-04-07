@@ -53,7 +53,7 @@ export default function QrCodeGenerator() {
 
   return (
     <ToolLayout title="QR Code Generator" description="Generate QR codes from text or URLs">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-3">
           <div>
             <span className="text-xs text-text-secondary mb-1 block">Text or URL</span>

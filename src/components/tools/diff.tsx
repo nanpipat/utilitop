@@ -16,7 +16,7 @@ export default function TextDiff() {
       <div className="flex flex-wrap items-center gap-3 mb-3">
         <Toggle label="Ignore whitespace" checked={ignoreWhitespace} onChange={setIgnoreWhitespace} />
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
         <div>
           <span className="text-xs text-text-secondary mb-1 block">Original</span>
           <InputArea value={original} onChange={setOriginal} placeholder="Enter original text..." />

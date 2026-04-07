@@ -33,7 +33,7 @@ export default function YamlFormatter() {
         <Select value={indent} onChange={setIndent} label="Indent:" options={[{ value: "2", label: "2 spaces" }, { value: "4", label: "4 spaces" }]} />
         <ActionButton onClick={() => { setInput(""); setOutput(""); setError(""); }} variant="secondary">Clear</ActionButton>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <span className="text-xs text-text-secondary mb-1 block">Input</span>
           <InputArea value={input} onChange={setInput} placeholder="Paste your YAML here..." />

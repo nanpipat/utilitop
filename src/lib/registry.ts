@@ -1,12 +1,13 @@
 import { Tool, Category, CategoryInfo } from "@/types/tool";
 
 export const CATEGORIES: Record<Category, CategoryInfo> = {
-  formatters: { label: "Formatters", icon: "FileCode" },
-  encoders: { label: "Encoders / Decoders", icon: "Lock" },
-  generators: { label: "Generators", icon: "Sparkles" },
-  converters: { label: "Converters", icon: "ArrowLeftRight" },
-  text: { label: "Text Tools", icon: "Type" },
-  network: { label: "Network / Web", icon: "Globe" },
+  formatters: { label: "Formatters", icon: "FileCode", color: "cat-formatters" },
+  encoders: { label: "Encoders / Decoders", icon: "Lock", color: "cat-encoders" },
+  generators: { label: "Generators", icon: "Sparkles", color: "cat-generators" },
+  converters: { label: "Converters", icon: "ArrowLeftRight", color: "cat-converters" },
+  text: { label: "Text Tools", icon: "Type", color: "cat-text" },
+  network: { label: "Network / Web", icon: "Globe", color: "cat-network" },
+  diagrams: { label: "Diagrams", icon: "GitBranch", color: "cat-diagrams" },
 };
 
 export const TOOLS: Tool[] = [
@@ -351,6 +352,42 @@ export const TOOLS: Tool[] = [
     keywords: ["jwt", "generate", "sign", "token", "hs256"],
     path: "/network/jwt-generator",
     icon: "KeyRound",
+  },
+  {
+    id: "mermaid",
+    name: "Mermaid",
+    description: "Create diagrams using Mermaid syntax (local rendering)",
+    category: "diagrams",
+    keywords: ["diagram", "flowchart", "sequence", "uml", "chart", "mermaid", "gantt", "class"],
+    path: "/diagrams/mermaid",
+    icon: "Workflow",
+  },
+  {
+    id: "plantuml",
+    name: "PlantUML",
+    description: "Create UML diagrams using PlantUML syntax",
+    category: "diagrams",
+    keywords: ["plantuml", "uml", "activity", "sequence", "swimlane", "diagram"],
+    path: "/diagrams/plantuml",
+    icon: "Layers",
+  },
+  {
+    id: "graphviz",
+    name: "Graphviz",
+    description: "Create graphs using DOT language (local WASM rendering)",
+    category: "diagrams",
+    keywords: ["dot", "graphviz", "graph", "network", "digraph", "wasm"],
+    path: "/diagrams/graphviz",
+    icon: "Share2",
+  },
+  {
+    id: "d2",
+    name: "D2",
+    description: "Create modern diagrams using D2 syntax",
+    category: "diagrams",
+    keywords: ["d2", "diagram", "modern", "graph"],
+    path: "/diagrams/d2",
+    icon: "Spline",
   },
 ];
 

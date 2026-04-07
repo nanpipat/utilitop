@@ -18,6 +18,7 @@ const CATEGORY_ORDER: Category[] = [
   "converters",
   "text",
   "network",
+  "diagrams",
 ];
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
@@ -50,20 +51,20 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   return (
     <div className="flex min-h-screen">
       <Sidebar onSearchOpen={() => setSearchOpen(true)} />
-      <div className="flex-1 flex flex-col min-h-screen overflow-hidden">
+      <div className="flex-1 flex flex-col min-h-screen min-w-0 overflow-hidden">
         <Header
           onMenuToggle={() => setMobileMenuOpen(!mobileMenuOpen)}
           onSearchOpen={() => setSearchOpen(true)}
           isDark={isDark}
           onToggleDark={toggleDark}
         />
-        <main className="flex-1 overflow-y-auto">{children}</main>
+        <main className="flex-1 overflow-y-auto overflow-x-hidden">{children}</main>
       </div>
 
-      <div className="hidden lg:flex items-center gap-1 fixed top-2 right-4 z-30">
+      <div className="hidden lg:flex items-center gap-1 fixed top-3 right-5 z-30">
         <button
           onClick={toggleDark}
-          className="p-2 hover:bg-bg-hover rounded-md transition-colors text-text-secondary"
+          className="p-2 hover:bg-bg-hover rounded-xl transition-all duration-200 text-text-secondary hover:text-text-primary"
         >
           {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
         </button>
@@ -72,22 +73,26 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       <SearchBar open={searchOpen} onClose={() => setSearchOpen(false)} />
 
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-40">
-          <div className="fixed inset-0 bg-black/40" onClick={() => setMobileMenuOpen(false)} />
-          <div className="fixed left-0 top-0 bottom-0 w-[280px] bg-bg-primary border-r border-border overflow-y-auto">
-            <div className="flex items-center justify-between px-4 py-3 border-b border-border">
-              <span className="font-semibold text-sm">Utilitop</span>
-              <button onClick={() => setMobileMenuOpen(false)}>
+        <div className="lg:hidden fixed inset-0 z-40 animate-fade-in">
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
+          <div className="fixed left-0 top-0 bottom-0 w-[280px] sm:w-[300px] max-w-[85vw] bg-bg-primary border-r border-border overflow-y-auto shadow-xl animate-slide-up">
+            <div className="flex items-center justify-between px-4 sm:px-5 py-3 sm:py-4 border-b border-border">
+              <div className="flex items-center gap-2">
+                <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-accent to-blue-400 flex items-center justify-center text-white font-bold text-[10px]">U</div>
+                <span className="font-bold text-sm">Utilitop</span>
+              </div>
+              <button onClick={() => setMobileMenuOpen(false)} className="p-1.5 hover:bg-bg-hover rounded-lg">
                 <X className="w-4 h-4" />
               </button>
             </div>
-            <nav className="px-2 py-2">
+            <nav className="px-2 sm:px-3 py-3">
               {CATEGORY_ORDER.map((cat) => {
                 const info = CATEGORIES[cat];
                 const tools = TOOLS.filter((t) => t.category === cat);
                 return (
-                  <div key={cat} className="mb-2">
-                    <div className="px-2 py-1 text-xs font-medium text-text-secondary">
+                  <div key={cat} className="mb-2 sm:mb-3">
+                    <div className="flex items-center gap-2 px-2 py-1.5 text-xs font-semibold text-text-secondary">
+                      <div className={`w-4 h-4 rounded bg-${info.color}/15 text-${info.color} flex items-center justify-center text-[8px]`}>●</div>
                       {info.label}
                     </div>
                     {tools.map((tool) => (
@@ -95,10 +100,10 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                         key={tool.id}
                         href={tool.path}
                         className={cn(
-                          "block px-3 py-1.5 text-xs rounded transition-colors",
+                          "block px-3 py-1.5 text-xs rounded-lg transition-all duration-150 ml-2",
                           pathname === tool.path
-                            ? "bg-bg-active font-medium"
-                            : "text-text-secondary hover:bg-bg-hover"
+                            ? "bg-accent/10 text-accent font-semibold"
+                            : "text-text-secondary hover:bg-bg-hover hover:text-text-primary"
                         )}
                       >
                         {tool.name}

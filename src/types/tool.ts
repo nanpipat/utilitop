@@ -14,9 +14,11 @@ export type Category =
   | "generators"
   | "converters"
   | "text"
-  | "network";
+  | "network"
+  | "diagrams";
 
 export interface CategoryInfo {
   label: string;
   icon: string;
+  color: string;
 }

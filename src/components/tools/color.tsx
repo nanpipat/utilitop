@@ -67,7 +67,7 @@ export default function ColorPicker() {
 
   return (
     <ToolLayout title="Color Picker" description="Pick and convert colors between formats">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-3">
           <div className="w-full h-32 rounded-md border border-border" style={{ backgroundColor: hex }} />
           <div>

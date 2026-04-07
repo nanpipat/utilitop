@@ -75,7 +75,7 @@ export default function GzipTool() {
         <ActionButton onClick={compress}>Process</ActionButton>
         <ActionButton onClick={() => { setInput(""); setOutput(""); setError(""); setStats(null); }} variant="secondary">Clear</ActionButton>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div>
           <span className="text-xs text-text-secondary mb-1 block">Input</span>
           <InputArea value={input} onChange={setInput} placeholder={mode === "compress" ? "Enter text to compress..." : "Enter Base64-encoded GZip data..."} />

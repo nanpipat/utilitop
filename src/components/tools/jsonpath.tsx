@@ -35,7 +35,7 @@ export default function JsonPathTester() {
             <button key={ex} onClick={() => setPath(ex)} className="px-2 py-1 text-[10px] bg-bg-hover rounded hover:bg-bg-active">{ex}</button>
           ))}
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div>
             <span className="text-xs text-text-secondary mb-1 block">JSON Data</span>
             <InputArea value={jsonInput} onChange={setJsonInput} placeholder="Paste JSON here..." rows={10} />

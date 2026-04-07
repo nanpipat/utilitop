@@ -34,7 +34,7 @@ export default function JsonYamlConverter() {
         <ActionButton onClick={convert}>Convert</ActionButton>
         <ActionButton onClick={() => { setInput(""); setOutput(""); setError(""); }} variant="secondary">Clear</ActionButton>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <span className="text-xs text-text-secondary mb-1 block">{mode === "json-to-yaml" ? "JSON Input" : "YAML Input"}</span>
           <InputArea value={input} onChange={setInput} placeholder={mode === "json-to-yaml" ? "Paste JSON here..." : "Paste YAML here..."} />

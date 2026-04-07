@@ -45,7 +45,7 @@ export default function CssFormatter() {
         <Toggle label="Minify" checked={minify} onChange={setMinify} />
         <ActionButton onClick={() => { setInput(""); setOutput(""); setError(""); }} variant="secondary">Clear</ActionButton>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <span className="text-xs text-text-secondary mb-1 block">Input</span>
           <InputArea value={input} onChange={setInput} placeholder="Paste your CSS here..." />

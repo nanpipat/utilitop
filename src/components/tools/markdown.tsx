@@ -31,7 +31,7 @@ export default function MarkdownPreview() {
         <CopyButton value={html} />
         <span className="text-xs text-text-secondary ml-1">Copy HTML</span>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div>
           <span className="text-xs text-text-secondary mb-1 block">Markdown</span>
           <textarea value={input} onChange={(e) => setInput(e.target.value)} className="w-full px-3 py-2 bg-bg-secondary border border-border rounded-md font-mono text-sm resize-y focus:outline-none focus:ring-1 focus:ring-accent" rows={16} />

@@ -29,7 +29,7 @@ export default function UnicodeTool() {
         <Select value={mode} onChange={setMode} options={[{ value: "encode", label: "Text → Unicode" }, { value: "decode", label: "Unicode → Text" }]} />
         <ActionButton onClick={() => setInput("")} variant="secondary">Clear</ActionButton>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <span className="text-xs text-text-secondary mb-1 block">Input</span>
           <InputArea value={input} onChange={setInput} placeholder={mode === "encode" ? "Enter text..." : "Enter \\u0041 format..."} />
