@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useDeferredValue } from "react";
 import { useRouter } from "next/navigation";
 import { TOOLS, CATEGORIES, fuzzySearchTools } from "@/lib/registry";
 import { Search, X } from "lucide-react";
@@ -16,7 +16,9 @@ export default function SearchBar({ open, onClose }: SearchBarProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const router = useRouter();
 
-  const results = query.trim() ? fuzzySearchTools(query) : TOOLS;
+  // useDeferredValue lets React prioritize input responsiveness over search computation
+  const deferredQuery = useDeferredValue(query);
+  const results = deferredQuery.trim() ? fuzzySearchTools(deferredQuery) : TOOLS;
 
   useEffect(() => {
     if (open) {

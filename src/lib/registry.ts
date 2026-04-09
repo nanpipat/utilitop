@@ -1,5 +1,15 @@
 import { Tool, Category, CategoryInfo } from "@/types/tool";
 
+export const CATEGORY_ORDER: Category[] = [
+  "formatters",
+  "encoders",
+  "generators",
+  "converters",
+  "text",
+  "network",
+  "diagrams",
+];
+
 export const CATEGORIES: Record<Category, CategoryInfo> = {
   formatters: { label: "Formatters", icon: "FileCode", color: "cat-formatters" },
   encoders: { label: "Encoders / Decoders", icon: "Lock", color: "cat-encoders" },
@@ -391,16 +401,25 @@ export const TOOLS: Tool[] = [
   },
 ];
 
+// Precomputed Maps for O(1) lookups
+const _toolById = new Map(TOOLS.map((t) => [t.id, t]));
+const _toolByPath = new Map(TOOLS.map((t) => [t.path, t]));
+
+// Precomputed grouped tools — avoids repeated TOOLS.filter() in render loops
+export const TOOLS_BY_CATEGORY: Record<Category, Tool[]> = Object.fromEntries(
+  CATEGORY_ORDER.map((cat) => [cat, TOOLS.filter((t) => t.category === cat)])
+) as Record<Category, Tool[]>;
+
 export function getToolById(id: string): Tool | undefined {
-  return TOOLS.find((t) => t.id === id);
+  return _toolById.get(id);
 }
 
 export function getToolByPath(category: string, tool: string): Tool | undefined {
-  return TOOLS.find((t) => t.path === `/${category}/${tool}`);
+  return _toolByPath.get(`/${category}/${tool}`);
 }
 
 export function getToolsByCategory(category: Category): Tool[] {
-  return TOOLS.filter((t) => t.category === category);
+  return TOOLS_BY_CATEGORY[category] ?? [];
 }
 
 export function searchTools(query: string): Tool[] {
@@ -416,16 +435,12 @@ export function searchTools(query: string): Tool[] {
 
 export function fuzzySearchTools(query: string): Tool[] {
   if (!query.trim()) return [];
-  const q = query.toLowerCase();
-
-  const exact = TOOLS.filter(
-    (tool) =>
-      tool.name.toLowerCase().includes(q) ||
-      tool.description.toLowerCase().includes(q) ||
-      tool.keywords.some((k) => k.toLowerCase().includes(q))
-  );
+  // Reuse searchTools for exact/substring match first
+  const exact = searchTools(query);
   if (exact.length > 0) return exact;
 
+  // Fallback: character-sequence fuzzy match
+  const q = query.toLowerCase();
   return TOOLS.filter((tool) => {
     const fields = [tool.name, tool.description, ...tool.keywords].join(" ").toLowerCase();
     let pi = 0;

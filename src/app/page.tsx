@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { TOOLS, CATEGORIES } from "@/lib/registry";
+import { CATEGORIES, CATEGORY_ORDER, TOOLS_BY_CATEGORY } from "@/lib/registry";
 import { Category } from "@/types/tool";
 import {
   Braces, FileText, FileCode, Database, Paintbrush, FileCode2,
@@ -18,16 +18,6 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   Regex, GitCompare, CaseSensitive, Calculator, ArrowDownAZ, List,
   Server, Search, Workflow, Layers, Share2, Spline,
 };
-
-const CATEGORY_ORDER: Category[] = [
-  "formatters",
-  "encoders",
-  "generators",
-  "converters",
-  "text",
-  "network",
-  "diagrams",
-];
 
 const CATEGORY_ICONS: Record<Category, string> = {
   formatters: "{ }",
@@ -57,7 +47,7 @@ export default function HomePage() {
       <div className="space-y-6 sm:space-y-10">
         {CATEGORY_ORDER.map((cat) => {
           const info = CATEGORIES[cat];
-          const tools = TOOLS.filter((t) => t.category === cat);
+          const tools = TOOLS_BY_CATEGORY[cat];
           return (
             <section key={cat}>
               <div className="flex items-center gap-2 sm:gap-2.5 mb-3 sm:mb-4">
