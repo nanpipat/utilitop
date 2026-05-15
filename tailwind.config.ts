@@ -37,15 +37,21 @@ const config: Config = {
         "cat-diagrams": "var(--cat-diagrams)",
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
+        sans: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "Fira Code", "monospace"],
       },
       boxShadow: {
+        "sm": "var(--shadow-sm)",
+        "md": "var(--shadow-md)",
+        "lg": "var(--shadow-lg)",
+        "xl": "var(--shadow-xl)",
         "glow": "0 0 0 3px var(--accent-light)",
       },
       borderRadius: {
-        "2xl": "1rem",
-        "3xl": "1.25rem",
+        "lg": "0.375rem",
+        "xl": "0.5rem",
+        "2xl": "0.625rem",
+        "3xl": "0.75rem",
       },
       animation: {
         "fade-in": "fadeIn 0.2s ease-out",

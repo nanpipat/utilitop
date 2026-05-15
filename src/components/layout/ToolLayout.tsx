@@ -13,9 +13,9 @@ interface ToolLayoutProps {
 export default function ToolLayout({ title, description, children }: ToolLayoutProps) {
   return (
     <div className="max-w-4xl mx-auto px-3 sm:px-5 py-4 sm:py-8 animate-fade-in">
-      <div className="mb-4 sm:mb-6">
-        <h1 className="text-base sm:text-xl font-bold tracking-tight">{title}</h1>
-        <p className="text-xs sm:text-sm text-text-secondary mt-1">{description}</p>
+      <div className="mb-4 sm:mb-6 brutal-box px-4 py-3 sm:px-5 sm:py-4 bg-bg-secondary">
+        <h1 className="text-base sm:text-xl font-extrabold tracking-tight">{title}</h1>
+        <p className="text-xs sm:text-sm text-text-secondary mt-1 font-medium">{description}</p>
       </div>
       {children}
     </div>
@@ -38,7 +38,8 @@ export function InputArea({ value, onChange, placeholder, className, rows }: Inp
       placeholder={placeholder}
       rows={rows || 8}
       className={cn(
-        "w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-bg-tertiary border border-border rounded-xl font-mono text-xs sm:text-sm resize-y focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent/50 placeholder:text-text-placeholder transition-all duration-200",
+        "w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-bg-tertiary rounded font-mono text-xs sm:text-sm resize-y focus:outline-none focus:bg-bg-primary placeholder:text-text-placeholder transition-all duration-150 shadow-sm",
+        "border-2 border-border focus:shadow-md",
         className
       )}
     />
@@ -54,7 +55,7 @@ export function OutputArea({ value, className }: OutputAreaProps) {
   return (
     <div
       className={cn(
-        "w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-bg-tertiary border border-border rounded-xl font-mono text-xs sm:text-sm whitespace-pre-wrap break-words min-h-[80px] sm:min-h-[100px] overflow-auto",
+        "w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-bg-tertiary border-2 border-border rounded font-mono text-xs sm:text-sm whitespace-pre-wrap break-words min-h-[80px] sm:min-h-[100px] overflow-auto shadow-sm",
         className
       )}
     >
@@ -83,10 +84,10 @@ export function ActionButton({
       onClick={onClick}
       disabled={disabled}
       className={cn(
-        "px-3 sm:px-4 py-1.5 sm:py-2 text-xs font-semibold rounded-lg sm:rounded-xl transition-all duration-200 disabled:opacity-40",
-        variant === "primary" && "bg-accent text-white hover:bg-accent-hover shadow-sm hover:shadow-md active:scale-[0.97]",
-        variant === "secondary" && "bg-bg-hover text-text-primary hover:bg-bg-active border border-border",
-        variant === "danger" && "bg-error text-white hover:opacity-90 shadow-sm",
+        "px-3 sm:px-4 py-1.5 sm:py-2 text-xs brutal-button disabled:opacity-40",
+        variant === "primary" && "bg-accent text-white hover:bg-accent-hover",
+        variant === "secondary" && "bg-bg-hover text-text-primary hover:bg-bg-active",
+        variant === "danger" && "bg-error text-white hover:opacity-90",
         className
       )}
     >
@@ -126,10 +127,10 @@ export function CopyButton({ value, className }: CopyButtonProps) {
     <button
       onClick={handleCopy}
       className={cn(
-        "flex items-center gap-1 px-2 py-0.5 sm:px-2.5 sm:py-1 text-[11px] sm:text-xs rounded-lg transition-all duration-200",
+        "flex items-center gap-1 px-2 py-0.5 sm:px-2.5 sm:py-1 text-[11px] sm:text-xs brutal-button",
         copied
-          ? "bg-success/15 text-success font-medium"
-          : "text-text-secondary hover:text-text-primary hover:bg-bg-hover",
+          ? "bg-success text-white"
+          : "bg-bg-primary text-text-secondary hover:text-text-primary hover:bg-bg-hover",
         className
       )}
     >
@@ -145,7 +146,7 @@ interface ErrorDisplayProps {
 
 export function ErrorDisplay({ message }: ErrorDisplayProps) {
   return (
-    <div className="flex items-start gap-2 px-3 sm:px-4 py-2.5 sm:py-3 bg-error/8 border border-error/20 rounded-xl text-xs sm:text-sm text-error animate-fade-in">
+    <div className="flex items-start gap-2 px-3 sm:px-4 py-2.5 sm:py-3 bg-accent-light border-2 border-border rounded text-xs sm:text-sm text-error animate-fade-in shadow-sm">
       <span className="text-sm sm:text-base leading-none mt-px shrink-0">⚠</span>
       <span className="leading-relaxed break-words">{message}</span>
     </div>
@@ -160,18 +161,18 @@ interface ToggleProps {
 
 export function Toggle({ label, checked, onChange }: ToggleProps) {
   return (
-    <label className="flex items-center gap-2 text-xs cursor-pointer select-none group">
+    <label className="flex items-center gap-2 text-xs cursor-pointer select-none group font-semibold">
       <div
         className={cn(
-          "w-8 h-[18px] rounded-full transition-all duration-200 relative shrink-0",
+          "w-8 h-[18px] rounded transition-all duration-150 relative shrink-0 border-2 border-border shadow-sm",
           checked ? "bg-accent" : "bg-bg-active"
         )}
         onClick={() => onChange(!checked)}
       >
         <div
           className={cn(
-            "absolute top-[2px] w-[14px] h-[14px] rounded-full bg-white shadow-sm transition-all duration-200",
-            checked ? "left-[16px]" : "left-[2px]"
+            "absolute top-[2px] w-[10px] h-[10px] rounded-sm bg-bg-primary border border-border transition-all duration-150",
+            checked ? "left-[17px]" : "left-[3px]"
           )}
         />
       </div>
@@ -199,7 +200,7 @@ export function Select({ value, onChange, options, label }: SelectProps) {
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="px-2 sm:px-3 py-1 sm:py-1.5 text-[11px] sm:text-xs bg-bg-tertiary border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent/50 transition-all duration-200 cursor-pointer"
+        className="px-2 sm:px-3 py-1 sm:py-1.5 text-[11px] sm:text-xs bg-bg-tertiary border-2 border-border rounded focus:outline-none focus:bg-bg-primary transition-all duration-150 cursor-pointer shadow-sm font-semibold"
       >
         {options.map((opt) => (
           <option key={opt.value} value={opt.value}>

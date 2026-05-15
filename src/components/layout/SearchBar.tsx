@@ -6,6 +6,11 @@ import { TOOLS, CATEGORIES, fuzzySearchTools } from "@/lib/registry";
 import { Search, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+const categoryTone = (color: string, tint = 14) => ({
+  color: `var(--${color})`,
+  backgroundColor: `color-mix(in srgb, var(--${color}) ${tint}%, var(--bg-primary))`,
+});
+
 interface SearchBarProps {
   open: boolean;
   onClose: () => void;
@@ -46,9 +51,9 @@ export default function SearchBar({ open, onClose }: SearchBarProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center px-3 sm:px-0 pt-[6vh] sm:pt-[12vh] animate-fade-in">
-      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative w-full max-w-lg bg-bg-primary border border-border rounded-xl sm:rounded-2xl shadow-xl overflow-hidden animate-slide-up">
-        <div className="flex items-center gap-3 px-3 sm:px-5 py-3 sm:py-4 border-b border-border">
+      <div className="fixed inset-0 bg-black/40" onClick={onClose} />
+      <div className="relative w-full max-w-lg bg-bg-primary border-2 border-border rounded shadow-xl overflow-hidden animate-slide-up">
+        <div className="flex items-center gap-3 px-3 sm:px-5 py-3 sm:py-4 border-b-2 border-border bg-bg-secondary">
           <Search className="w-4 h-4 text-accent shrink-0" />
           <input
             type="text"
@@ -59,10 +64,10 @@ export default function SearchBar({ open, onClose }: SearchBarProps) {
             }}
             onKeyDown={handleKeyDown}
             placeholder="Search tools..."
-            className="flex-1 bg-transparent text-sm text-text-primary placeholder:text-text-placeholder outline-none"
+            className="flex-1 bg-transparent text-sm text-text-primary placeholder:text-text-placeholder outline-none font-semibold"
             autoFocus
           />
-          <button onClick={onClose} className="text-text-secondary hover:text-text-primary p-1 rounded-lg hover:bg-bg-hover transition-colors">
+          <button onClick={onClose} className="text-text-primary p-1 bg-bg-primary brutal-button">
             <X className="w-3.5 h-3.5" />
           </button>
         </div>
@@ -83,18 +88,24 @@ export default function SearchBar({ open, onClose }: SearchBarProps) {
                   }}
                   onMouseEnter={() => setSelectedIndex(i)}
                   className={cn(
-                    "flex items-center gap-2 sm:gap-3 w-full px-2.5 sm:px-3 py-2 sm:py-2.5 text-left rounded-lg sm:rounded-xl transition-all duration-150",
-                    i === selectedIndex ? "bg-accent/8" : "hover:bg-bg-hover"
+                    "flex items-center gap-2 sm:gap-3 w-full px-2.5 sm:px-3 py-2 sm:py-2.5 text-left rounded transition-all duration-150 border-2",
+                    i === selectedIndex ? "bg-bg-hover border-border shadow-sm" : "border-transparent hover:bg-bg-hover hover:border-border"
                   )}
                 >
-                  <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-${catInfo.color}/10 text-${catInfo.color} flex items-center justify-center shrink-0`}>
+                  <div
+                    className="w-6 h-6 sm:w-7 sm:h-7 rounded flex items-center justify-center shrink-0 border-2 border-border"
+                    style={categoryTone(catInfo.color, 12)}
+                  >
                     <span className="text-[9px] sm:text-[10px] font-bold">●</span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-xs sm:text-sm font-medium truncate">{tool.name}</div>
+                    <div className="text-xs sm:text-sm font-extrabold truncate">{tool.name}</div>
                     <div className="text-[10px] sm:text-xs text-text-secondary truncate">{tool.description}</div>
                   </div>
-                  <span className={`hidden sm:inline text-[10px] px-2 py-0.5 rounded-md bg-${catInfo.color}/10 text-${catInfo.color} capitalize shrink-0 font-medium`}>
+                  <span
+                    className="hidden sm:inline text-[10px] px-2 py-0.5 rounded capitalize shrink-0 font-extrabold border-2 border-border"
+                    style={categoryTone(catInfo.color, 12)}
+                  >
                     {tool.category}
                   </span>
                 </button>
@@ -102,10 +113,10 @@ export default function SearchBar({ open, onClose }: SearchBarProps) {
             })
           )}
         </div>
-        <div className="hidden sm:flex items-center gap-3 px-5 py-2.5 border-t border-border text-[10px] text-text-secondary">
-          <span className="flex items-center gap-1"><kbd className="px-1 py-0.5 bg-bg-tertiary rounded text-[9px]">↑↓</kbd> Navigate</span>
-          <span className="flex items-center gap-1"><kbd className="px-1 py-0.5 bg-bg-tertiary rounded text-[9px]">↵</kbd> Select</span>
-          <span className="flex items-center gap-1"><kbd className="px-1 py-0.5 bg-bg-tertiary rounded text-[9px]">esc</kbd> Close</span>
+        <div className="hidden sm:flex items-center gap-3 px-5 py-2.5 border-t-2 border-border bg-bg-secondary text-[10px] text-text-secondary font-semibold">
+          <span className="flex items-center gap-1"><kbd className="px-1 py-0.5 bg-bg-tertiary rounded text-[9px] border border-border">↑↓</kbd> Navigate</span>
+          <span className="flex items-center gap-1"><kbd className="px-1 py-0.5 bg-bg-tertiary rounded text-[9px] border border-border">↵</kbd> Select</span>
+          <span className="flex items-center gap-1"><kbd className="px-1 py-0.5 bg-bg-tertiary rounded text-[9px] border border-border">esc</kbd> Close</span>
         </div>
       </div>
     </div>
